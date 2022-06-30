@@ -3,32 +3,26 @@ pipeline
     agent any
     tools
     {
-        maven "maven 3.8.6"
+        maven 'maven 3.8.6'
     }
     stages
     {
-        stage('Initialize')
+        stage("GITHUB CHECKOUT")
         {
-            steps{
-                echo "PATH = ${M2_HOME}/bin:${PATH}"
-                echo "M2_HOME = /opt/maven"
+            steps
+            {
+                git branch: 'main', url: 'https://github.com/khushilharia/sonarqube.git'
+                echo "Git Checkout Successful"
             }
         }
-       stage('GetCode')
-       {
+        stage("BUILD CHECKOUT")
+        {
             steps
             {
-                git 'https://github.com/khushilharia/SonarqubeDemo.git/'
-                echo "Git checkout successful"
+                echo "Build Stage"
+                bat 'mvn clean package'
+                echo 'Maven step finished'
             }
-         }        
-       stage('Build')
-       {
-            steps
-            {
-             	echo "Build Stage"
-                sh 'mvn clean compile'
-            }
-         }
+        }
     }
 }
