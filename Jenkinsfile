@@ -8,6 +8,7 @@ pipeline
             steps
             {
                 git 'https://github.com/khushilharia/SonarqubeDemo.git/'
+                echo "Git checkout successful"
             }
          }        
        stage('Build')
